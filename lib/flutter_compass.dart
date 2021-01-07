@@ -16,7 +16,7 @@ class CompassEvent {
   // NOTE: for iOS this is computed by the platform and is reliable. For
   // Android several values are hard-coded, and the true error could be more
   // or less than the value here.
-  final double accuracy;
+  final double? accuracy;
 
   CompassEvent.fromList(List<double> data)
       : heading = data[0],
@@ -43,8 +43,8 @@ class FlutterCompass {
   static const EventChannel _compassChannel =
       const EventChannel('hemanthraj/flutter_compass');
 
-  BehaviorSubject<CompassEvent> _compassEvents;
-  static StreamSubscription _sub;
+  BehaviorSubject<CompassEvent>? _compassEvents;
+  static StreamSubscription? _sub;
 
   /// Provides a [Stream] of compass events that can be listened to.
   static Stream<CompassEvent> get events {
@@ -55,13 +55,13 @@ class FlutterCompass {
             .receiveBroadcastStream()
             .map((dynamic data) => CompassEvent.fromList(data.cast<double>()))
             .listen(
-              (event) => _instance._compassEvents.add(event),
-              onError: _instance._compassEvents.addError,
+              (event) => _instance._compassEvents!.add(event),
+              onError: _instance._compassEvents!.addError,
             );
       }
     }
 
-    return _instance._compassEvents;
+    return _instance._compassEvents!;
   }
 
   void dispose() {

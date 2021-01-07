@@ -1,3 +1,9 @@
+## 0.6.0-nullsafety.0
+
+**Breaking Change:** Migrate to null-safety
+Updated rxDart to 0.26.0-nullsafety.0
+
+
 ## 0.5.1
 
 Android: 
